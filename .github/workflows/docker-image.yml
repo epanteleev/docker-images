@@ -4,6 +4,7 @@ on:
   push:
     paths: 
       - "ubuntu-gcc14"
+  workflow_dispatch:
       
 jobs:
   build:
