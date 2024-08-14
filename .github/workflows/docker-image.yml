@@ -14,4 +14,4 @@ jobs:
     - name: Buildx setup
       uses: docker/setup-buildx-action@v3.6.1
     - name: Build the Docker image
-      run: docker buildx ubuntu-gcc14 --tag ubuntu-gcc14:$(date +%s)
+      run: docker buildx --tag ubuntu-gcc14:$(date +%s) ubuntu-gcc14
