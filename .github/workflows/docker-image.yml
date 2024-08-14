@@ -1,0 +1,14 @@
+name: Docker Image CI
+
+on:
+  push:
+    paths: 
+      - "ubuntu-gcc14"
+      
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Build the Docker image
+      run: docker build ubuntu-gcc14 --file Dockerfile --tag my-image-name:$(date +%s)
