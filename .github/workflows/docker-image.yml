@@ -11,10 +11,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    container: 
-      image: docker:latest
-      volumes:
-        - ${{ github.workspace }}:${{ github.workspace }}:Z
     steps:
     - name: Build the Docker image
       run: |
