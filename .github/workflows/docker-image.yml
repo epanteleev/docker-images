@@ -22,7 +22,8 @@ jobs:
       with:
         registry: https://ghcr.io/
         username: epanteleev
-        password: ${{ secrets.GH_TOKEN }}
+        secrets: |
+            GIT_AUTH_TOKEN=${{ secrets.GH_TOKEN }}
     - name: Build and push
       uses: docker/build-push-action@v6
       with:
