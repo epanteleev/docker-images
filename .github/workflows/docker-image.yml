@@ -18,9 +18,11 @@ jobs:
     - name: Build the Docker image
       run: docker buildx build --tag ghcr.io/epanteleev/ubuntu-gcc14 ubuntu-gcc14
     - name: Login ghcr
-      run: echo ${{ secrets.GH_TOKEN }} | docker login ghcr.io -u epanteleev --password-stdin
-    - name: Publish image
-      run: docker push ghcr.io/epanteleev/ubuntu-gcc14
+      run: |
+        echo ${{ secrets.GH_TOKEN }} | docker login ghcr.io -u epanteleev --password-stdin
+        docker push ghcr.io/epanteleev/ubuntu-gcc14
+    # - name: Publish image
+      # run: docker push ghcr.io/epanteleev/ubuntu-gcc14
     # - name: Log in to the Container registry
     #   uses: docker/login-action@v3.3.0
     #   with:
