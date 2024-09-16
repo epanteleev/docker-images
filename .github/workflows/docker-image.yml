@@ -1,5 +1,4 @@
 name: Docker Image CI
-
 on:
   push:
     branches:
@@ -11,18 +10,12 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    container:
-      image: docker:latest
-      volumes:
-        - ${{ github.workspace }}:${{ github.workspace }}:Z
     steps:
-    - name: CD
-      run: cd ${{ github.workspace }}
-    - name: ls
-      run: ls
+    - uses: actions/checkout@v4
+    - name: Buildx setup
+      uses: docker/setup-buildx-action@v3.6.1
     - name: Build the Docker image
       run: |
-        ls
         docker buildx build --output type=docker --tag ghcr.io/epanteleev/ubuntu-gcc14 ubuntu-gcc14
         echo ${{ secrets.GH_TOKEN }} | docker login ghcr.io -u epanteleev --password-stdin
         docker image ls
