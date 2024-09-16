@@ -14,11 +14,11 @@ jobs:
     container: 
       image: docker:latest
       volumes:
-        - ${{ github.workspace }}:${{ github.workspace }}
+        - ${GITHUB_WORKSPACE}:${GITHUB_WORKSPACE}
     steps:
     - name: Build the Docker image
       run: |
-        cd echo ${{ github.workspace }}
+        cd ${GITHUB_WORKSPACE}
         docker buildx build --output type=docker --tag ghcr.io/epanteleev/ubuntu-gcc14 ubuntu-gcc14
         echo ${{ secrets.GH_TOKEN }} | docker login ghcr.io -u epanteleev --password-stdin
         docker image ls
