@@ -11,10 +11,15 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    container:
+      image: docker:latest
     steps:
+    - name: CD
+      run: cd ${{ github.workspace }}
+    - name: ls
+      run: ls
     - name: Build the Docker image
       run: |
-        cd ${{ github.workspace }}
         ls
         docker buildx build --output type=docker --tag ghcr.io/epanteleev/ubuntu-gcc14 ubuntu-gcc14
         echo ${{ secrets.GH_TOKEN }} | docker login ghcr.io -u epanteleev --password-stdin
