@@ -13,6 +13,8 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: docker:latest
+      volumes:
+        - ${{ github.workspace }}:${{ github.workspace }}:Z
     steps:
     - name: CD
       run: cd ${{ github.workspace }}
