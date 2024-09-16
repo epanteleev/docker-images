@@ -11,28 +11,12 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    container: 
+      image: docker:latest
     steps:
-    - uses: actions/checkout@v4
-    - name: Buildx setup
-      uses: docker/setup-buildx-action@v3.6.1
     - name: Build the Docker image
       run: |
         docker buildx build --output type=docker --tag ghcr.io/epanteleev/ubuntu-gcc14 ubuntu-gcc14
         echo ${{ secrets.GH_TOKEN }} | docker login ghcr.io -u epanteleev --password-stdin
         docker image ls
         docker push ghcr.io/epanteleev/ubuntu-gcc14
-    # - name: Publish image
-      # run: docker push ghcr.io/epanteleev/ubuntu-gcc14
-    # - name: Log in to the Container registry
-    #   uses: docker/login-action@v3.3.0
-    #   with:
-    #     registry: https://ghcr.io/
-    #     username: epanteleev
-    #     password: ${{ secrets.GH_TOKEN }}
-    # - name: Build and push
-    #   uses: docker/build-push-action@v6
-    #   with:
-    #     push: true
-    #     tags: ghcr.io/epanteleev/ubuntu-gcc14
-    #     secrets: |
-    #         GIT_AUTH_TOKEN=${{ secrets.GH_TOKEN }}
