@@ -19,6 +19,7 @@ jobs:
       run: |
         docker buildx build --tag ghcr.io/epanteleev/ubuntu-gcc14 ubuntu-gcc14
         echo ${{ secrets.GH_TOKEN }} | docker login ghcr.io -u epanteleev --password-stdin
+        docker image ls
         docker push ghcr.io/epanteleev/ubuntu-gcc14
     # - name: Publish image
       # run: docker push ghcr.io/epanteleev/ubuntu-gcc14
